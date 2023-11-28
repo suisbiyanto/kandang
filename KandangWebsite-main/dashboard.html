@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kandang - Smart controlling</title>
+    <link rel="icon" href="logo.png" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/77fa727d74.js" crossorigin="anonymous"></script>    
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  
+  </head>
+  <body class="font-poppins text-lg">
+    <section>
+      <!-- Navbar Start -->
+      <div>
+        <nav class="container relative mx-auto p-6">
+          <div class="flex items-center justify-between">
+            <div class="flex">
+              <img src="./img/barn.png" class="h-12 fill-sky-400" alt="" />
+              <div class="ml-2 -mt-1 place-content-center text-3xl font-extrabold">
+                <h1 class="text-lg">KANDANG</h1>
+                <h1 class="text-lg">MONITORING</h1>
+              </div>
+            </div>
+            <!-- <div class="flex space-x-6"> -->
+            <div class="flex space-x-6">
+              <label class="swap-rotate swap">
+                <!-- this hidden checkbox controls the state -->
+                <input type="checkbox" id="toggleTheme" />
+
+                <!-- sun icon -->
+                <svg class="swap-on h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
+                  />
+                </svg>
+
+                <!-- moon icon -->
+                <svg class="swap-off h-8 w-8 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path
+                    d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
+                  />
+                </svg>
+              </label>
+              <button id="logout-button" class="h-1 fill-current" value="ok">
+                <label>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                </label>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="mx-auto mt-5 flex justify-center">
+        <div class="card w-96 bg-secondary shadow-md">
+          <div class="flex pl-5">            
+            <!-- <div class="h-28 w-28 rounded-full bg-sky-400">
+              <svg class="mx-auto w-24 animate-wiggle fill-base-100 pt-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path
+                  d="M23.25 40q-2.7 0-4.275-1.4-1.575-1.4-1.575-4.25h3.4q0 1.3.575 1.975T23.25 37q1.35 0 1.925-.6t.575-2.05q0-1.45-.575-2.125t-1.925-.675H4v-3h19.25q2.7 0 4.1 1.4 1.4 1.4 1.4 4.4 0 2.85-1.4 4.25t-4.1 1.4ZM4 19.6v-3h27.4q1.85 0 2.7-.875.85-.875.85-2.925t-.85-2.925Q33.25 9 31.4 9q-1.9 0-2.75 1.025-.85 1.025-.85 2.575h-3q0-2.9 1.75-4.75T31.4 6q3.05 0 4.8 1.775t1.75 5.025q0 3.25-1.75 5.025-1.75 1.775-4.8 1.775Zm33.6 16.5v-3q1.75 0 2.575-.975Q41 31.15 41 29.3q0-1.9-.925-2.75-.925-.85-2.675-.85H4v-3h33.4q3.1 0 4.85 1.75Q44 26.2 44 29.3q0 3.2-1.65 5-1.65 1.8-4.75 1.8Z"
+                />
+              </svg>
+            </div> -->
+            
+            <div class="card-text my-auto rounded-full bg-sky-400">                           
+              <div class="icon">
+                <i class="fa-solid fa-temperature-half"></i>
+              </div>
+            </div>
+            <div class="my-auto pl-5">
+              <h1 class="text-lg" >Node 1</h1> 
+              <h1 class="text-lg font-extrabold" id="value-time">--</h1>
+              <h1 class="text-lg font-semibold">Suhu :</h1>
+              <h1 class="text-3xl font-extrabold" id="value-suhu">--</h1>
+
+              <h1 class="text-lg font-semibold">Kelembapan :</h1>
+              <h1 class="text-3xl font-extrabold" id="value-kelembapan">--</h1>
+            </div>
+          </div>
+          <div class="alert alert-info shadow-lg" id="notification">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 flex-shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Suhu Tinggi!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto mt-5 flex justify-center">
+        <div class="card w-96 bg-secondary shadow-md">
+          <div class="flex pl-5">           
+            <div class="card-text my-auto rounded-full bg-sky-400">
+              <div class="icon">
+                <i class="fa-solid fa-temperature-half"></i>
+              </div>
+            </div>
+            <div class="my-auto pl-5">
+              <h1 class="text-lg" >Node 2</h1> 
+              <h1 class="text-lg font-extrabold" id="value-time2">--</h1>
+              <h1 class="text-lg font-semibold">Suhu :</h1>
+              <h1 class="text-3xl font-extrabold" id="value-suhu2">--</h1>
+
+              <h1 class="text-lg font-semibold">Kelembapan :</h1>
+              <h1 class="text-3xl font-extrabold" id="value-kelembapan2">--</h1>
+            </div>
+          </div>
+          <!-- <div class="alert alert-info shadow-lg" id="notification">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 flex-shrink-0 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Suhu Tinggi!</span>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="mx-auto mt-8 flex justify-center">
+        <div class="card w-96 bg-secondary shadow-md">
+          <div class="flex p-10">
+            <!-- <div class="my-auto h-28 w-28 animate-spin rounded-full bg-sky-400" id="fan-logo">
+              <svg class="mx-auto w-24 fill-base-100 pt-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path
+                  d="M21.2 44q-2.55 0-3.875-1.525Q16 40.95 16 39q0-1.3.575-2.525.575-1.225 1.775-2.025 1.1-.7 1.825-1.875.725-1.175 1.075-3.225-.05 0-.05-.025t-.1-.075l-5.8 2.05q-.85.3-1.65.5-.8.2-1.65.2-3.15 0-5.575-2.75Q4 26.5 4 21.2q0-2.55 1.525-3.875Q7.05 16 8.95 16q1.3 0 2.55.575 1.25.575 2.05 1.775.7 1.1 1.975 1.875Q16.8 21 18.65 21.25q.05-.05.075-.1.025-.05.025-.1L16.7 15.3q-.3-.85-.5-1.65-.2-.8-.2-1.6 0-3.2 2.75-5.625T26.8 4q2.55 0 3.875 1.525Q32 7.05 32 8.95q0 1.3-.575 2.55-.575 1.25-1.775 2.05-1.3.85-2.025 2.25-.725 1.4-.825 2.9.05.05.075.025.025-.025.075.075l5.75-2.15q.85-.3 1.625-.475T35.95 16Q40 16 42 19.35t2 7.45q0 2.55-1.6 3.875Q40.8 32 38.85 32q-1.25 0-2.425-.575-1.175-.575-1.975-1.775-.7-1.1-1.875-1.825Q31.4 27.1 29.35 26.7l-.075.15q-.025.05-.075.1l2.1 5.75q.3.8.5 1.525.2.725.2 1.525.05 3.25-2.7 5.75T21.2 44ZM24 27q1.25 0 2.125-.875T27 24q0-1.25-.875-2.125T24 21q-1.25 0-2.125.875T21 24q0 1.25.875 2.125T24 27Zm-2.9-8.25q.6-.25 1.3-.45.7-.2 1.4-.3.4-2.25 1.475-4.05 1.075-1.8 2.725-2.9.5-.35.75-.875T29 8.95q0-.8-.525-1.375T26.8 7q-2.15 0-4.925 1.025T19 12.05q0 .55.125 1.05t.275.9ZM12 29q.7 0 2-.4l4.75-1.7q-.4-.7-.575-1.4Q18 24.8 18 24.2q-2.25-.4-4.05-1.475-1.8-1.075-2.9-2.725-.35-.5-.95-.75T8.95 19q-.95 0-1.45.525T7 21.2q0 3.1 1.275 5.45T12 29Zm9.2 12q2.65 0 5.225-1.15Q29 38.7 29 35.9q0-.55-.1-.95-.1-.4-.3-.95l-1.7-4.75q-.65.3-1.325.5-.675.2-1.375.25-.4 2.25-1.475 4.05-1.075 1.8-2.725 2.9-.45.3-.725.925Q19 38.5 19 39.05q.05.75.55 1.35.5.6 1.65.6Zm17.65-12q.85 0 1.5-.45T41 26.8q0-2.2-1.025-4.95T35.9 19q-.55 0-1.025.1-.475.1-.875.25l-4.75 1.75q.25.4.5 1.275.25.875.25 1.425 2.25.4 4.05 1.475 1.8 1.075 2.9 2.725.3.4.825.7.525.3 1.075.3ZM30 23.8ZM23.8 18ZM18 24.2Zm6.2 5.8Z"
+                />
+              </svg>
+            </div> -->
+
+            <div class="card-text rounded-full bg-sky-400">
+              <div class="icon">                
+                <i class="fa-solid fa-fan"></i>
+              </div>
+            </div>
+            <div class="my-auto pl-5">
+              <h1 class="text-lg font-semibold">Blower</h1>
+              <h1 class="text-lg font-extrabold" id="fan">--</h1>
+                <input type="checkbox" class="toggle-primary toggle toggle-lg" id="toggle" />
+              <h1 class="text-base font-semibold">Pemanas:</h1>
+              <h1 class="text-lg font-extrabold" id="fanspeed">--</h1>
+                <input type="checkbox" class="toggle-primary toggle toggle-lg" id="speed" />
+              <!-- <label class="label cursor-pointer">
+                <input type="checkbox" class="checkbox-primary checkbox checkbox-md" id="speed" />
+              </label> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- The button to open modal -->
+      <div class="mt-10 flex justify-center">
+        <label for="my-modal-4" class="modal-button btn-info btn rounded-full">
+          <svg class="mx-auto mr-2 w-6 fill-base-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 14a1 1 0 0 1-2 0v-5a1 1 0 0 1 2 0v5Zm-1-7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+          </svg>
+          <h4 class="font-extrabold text-base-100">How it works?</h4>
+        </label>
+        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+        <label for="my-modal-4" class="modal cursor-pointer">
+          <label class="modal-box relative" for="">
+            <label for="my-modal-4" class="btn-sm btn-circle btn absolute right-2 top-2">✕</label>
+            <h3 class="text-lg font-bold">SmokeBending</h3>
+            <div>
+              <img src="./img/component.png" alt="" class="rounded-lg" />
+              <h4 class="py-4">Indikator Gas:<br />0V-1V Kipas Mati<br />1V-3V Kipas Menyala pelan<br />3V-5V Kipas Menyala cepat</h4>
+              <p class="py-4">Setelah menggunakan fitur toggle pada website, pastikan atur kembali ke posisi "OFF" untuk menghidupkan / mematikan kipas secara otomatis</p>
+            </div>            
+          </label>
+        </label>
+      </div>
+    </section>
+    <script type="module" src="modules/firebase_push.js"></script>
+    <script type="module">
+      import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+      import { database } from "./modules/firebase_push.js";
+
+
+      const starCountRef = ref(database, 'Node_1/');
+      const starCountRef2 = ref(database, 'Node_2/');
+
+      // let logoutButton = document.getElementById("signinsignup");
+      let logoutButton = document.getElementById("logout-button");
+
+      logoutButton.addEventListener("click", (e) => {        
+        // const auth = getAuth(app);
+        // signOut(auth)
+          // .then(() => {
+          //   alert("Logout berhasil!");
+          //   location.href = "./index.html";
+          // })
+          // .catch((error) => {});
+          alert ("Logout berhasil!")
+          location.href = "./index.html";
+      });
+      
+
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        update(data);
+      });
+
+      onValue(starCountRef2, (snapshot2) => {
+        const data_node2 = snapshot2.val();
+        update2(data_node2);
+      });
+
+      var update = (data) => {
+          console.log(data);
+          $("#value-time").text(data["time"]);
+          $("#value-suhu").text(data["Temperature2"]);
+          $("#value-kelembapan").text(data["Humidity2"]);
+      }
+      var update2 = (data_node2) => {
+          console.log(data_node2);
+          $("#value-time2").text(data_node2["time"]);
+          $("#value-suhu2").text(data_node2["Temperature2"]);
+          $("#value-kelembapan2").text(data_node2["Humidity2"]);
+          $("#fan").text(data_node2["Blower_Status"]);
+          $("#fanspeed").text(data_node2["Pemanas_Status"]);
+
+          $("#toggle").attr("checked", data_node2["Blower_Status"] == "1");
+          $("#speed").attr("checked", data_node2["Pemanas_Status"] == "1");
+      }
+
+    </script>
+  </body>
+</html>
